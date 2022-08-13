@@ -21,18 +21,20 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
           <h6 className='text-[22px] font-semibold mb-1'>{restaurant.name}</h6>
           <span>{restaurant.address}</span>
         </div>
-        <Button className='bg-[#4c54ee] text-white h-12 hidden group-hover:block'>
+        <Button className='bg-[#4c54ee] text-white h-12 hidden group-hover:block hover:bg-white hover:text-[#323cf0]'>
           <MinusIcon />
         </Button>
       </div>
       <div className='flex items-center justify-between mt-7'>
         <a
-          className='text-[#323cf0] group-hover:text-white'
+          className='text-[#323cf0] group-hover:text-white hover:underline'
           href={`mailto:${restaurant.email}`}
         >
           {restaurant.email}
         </a>
-        <a href={`tel:+${restaurant.phone}`}>{restaurant.phone}</a>
+        <a className='hover:underline' href={`tel:+${restaurant.phone}`}>
+          {restaurant.phone}
+        </a>
       </div>
     </div>
   );
