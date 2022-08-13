@@ -13,7 +13,7 @@ interface RestaurantsListProps {}
 
 const RestaurantsList: React.FC<RestaurantsListProps> = ({}) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isModal, setIsModal] = useState(true);
+  const [isModal, setIsModal] = useState(false);
 
   return (
     <section className='flex justify-center items-start flex-col'>
@@ -51,6 +51,7 @@ const RestaurantsList: React.FC<RestaurantsListProps> = ({}) => {
           <Button
             className='bg-[#323cf0] w-[88px] h-11 text-white hover:bg-[#4c54ee]'
             type='button'
+            onClick={() => setIsModal(true)}
           >
             <PlusIcon />
           </Button>
@@ -73,11 +74,15 @@ const RestaurantsList: React.FC<RestaurantsListProps> = ({}) => {
           <div className='flex flex-col space-y-5 w-full'>
             <TextInput placeholder='Name' />
             <TextInput placeholder='Address' />
-            <TextInput placeholder='Email' />
+            <TextInput
+              placeholder='Email'
+              hasError
+              errorMessage='Please provide a valid email address.'
+            />
             <TextInput placeholder='Phone' />
           </div>
         </ModalBody>
-        <ModalFooter className='flex pt-[30px] space-x-2'>
+        <ModalFooter className='flex pt-4  space-x-2'>
           <Button
             className='bg-[#323cf0] w-[88px] h-11 text-white hover:bg-[#4c54ee]'
             type='button'

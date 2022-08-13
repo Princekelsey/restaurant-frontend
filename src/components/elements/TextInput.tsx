@@ -16,12 +16,17 @@ const TextInput: React.FC<TextInputProps> = ({
   ...rest
 }) => {
   return (
-    <>
+    <div className='w-full'>
       <input
-        className={`w-full rounded-none p-2 border-[#848484] border-2 placeholder:text-[#6f6f6f] focus:outline-0 focus:border-[#323cf0] ${className}`}
+        className={`w-full rounded-none p-2 border-[#848484] border-2 placeholder:text-[#6f6f6f] focus:outline-0 focus:border-[#323cf0] ${
+          hasError ? "border-[#dd1313]" : "border-[#848484]"
+        } ${className}`}
         {...rest}
       />
-    </>
+      {hasError && errorMessage && (
+        <span className='text-[#dd1313]'>{errorMessage}</span>
+      )}
+    </div>
   );
 };
 

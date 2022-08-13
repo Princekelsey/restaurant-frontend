@@ -1,0 +1,12 @@
+query GetRestaurants($pagination: PaginationInput!) {
+  restaurants(pagination: $pagination) {
+    restaurants {
+      name
+      address
+      id
+      email
+      phone
+    }
+    totalCount
+  }
+}
