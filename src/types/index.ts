@@ -1,7 +1,8 @@
 export interface Restaurant {
+  __typename?: "Restaurant" | undefined;
   name: string;
   address: string;
-  id: number;
+  id: string;
   phone: string;
   email: string;
 }

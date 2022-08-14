@@ -1,27 +1,38 @@
 import React from "react";
-import { Restaurant } from "../../types";
+import type { Restaurant } from "../../types";
 import Button from "./Button";
 import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
 
 interface RestaurantCardProps {
   className?: string;
   restaurant: Restaurant;
+  onItemClick: (item: Restaurant) => void;
+  onDelete: (id: string) => void;
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
   className,
   restaurant,
+  onItemClick,
+  onDelete,
 }) => {
   return (
     <div
-      className={`py-[18px] px-5 bg-[#f3f4f5] w-full hover:bg-[#323cf0] hover:!text-white group ${className}`}
+      className={`py-[18px] px-5 bg-[#f3f4f5] w-full cursor-pointer hover:bg-[#323cf0] hover:!text-white group ${className}`}
+      onClick={() => onItemClick(restaurant)}
     >
       <div className='flex items-center justify-between'>
         <div>
           <h6 className='text-[22px] font-semibold mb-1'>{restaurant.name}</h6>
           <span>{restaurant.address}</span>
         </div>
-        <Button className='bg-[#4c54ee] text-white h-12 hidden group-hover:block hover:bg-white hover:text-[#323cf0]'>
+        <Button
+          className='bg-[#4c54ee] text-white h-12 hidden group-hover:block hover:bg-white hover:text-[#323cf0]'
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(restaurant.id);
+          }}
+        >
           <MinusIcon />
         </Button>
       </div>

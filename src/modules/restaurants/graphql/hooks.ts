@@ -41,13 +41,13 @@ export type MutationCreateRestaurantArgs = {
 
 
 export type MutationDeleteRestaurantArgs = {
-  id: Scalars['Float'];
+  id: Scalars['String'];
 };
 
 
 export type MutationUpdateRestaurantArgs = {
   data: UpdateRestaurantInput;
-  id: Scalars['Float'];
+  id: Scalars['String'];
 };
 
 export type PaginationInput = {
@@ -110,6 +110,13 @@ export type GetRestaurantsQueryVariables = Exact<{
 
 export type GetRestaurantsQuery = { __typename?: 'Query', restaurants: { __typename?: 'RestaurantPaginatationResponse', totalCount: number, restaurants: Array<{ __typename?: 'Restaurant', name: string, address: string, id: string, email: string, phone: string }> } };
 
+export type SearchRestaurantsQueryVariables = Exact<{
+  searchInput: SearchRestaurantInput;
+}>;
+
+
+export type SearchRestaurantsQuery = { __typename?: 'Query', searchRestaurants: { __typename?: 'RestaurantPaginatationResponse', totalCount: number, restaurants: Array<{ __typename?: 'Restaurant', name: string, address: string, id: string, email: string, phone: string }> } };
+
 
 export const GetRestaurantsDocument = `
     query GetRestaurants($pagination: PaginationInput!) {
@@ -137,5 +144,33 @@ export const useGetRestaurantsQuery = <
     useQuery<GetRestaurantsQuery, TError, TData>(
       ['GetRestaurants', variables],
       fetcher<GetRestaurantsQuery, GetRestaurantsQueryVariables>(client, GetRestaurantsDocument, variables, headers),
+      options
+    );
+export const SearchRestaurantsDocument = `
+    query SearchRestaurants($searchInput: SearchRestaurantInput!) {
+  searchRestaurants(searchInput: $searchInput) {
+    restaurants {
+      name
+      address
+      id
+      email
+      phone
+    }
+    totalCount
+  }
+}
+    `;
+export const useSearchRestaurantsQuery = <
+      TData = SearchRestaurantsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: SearchRestaurantsQueryVariables,
+      options?: UseQueryOptions<SearchRestaurantsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<SearchRestaurantsQuery, TError, TData>(
+      ['SearchRestaurants', variables],
+      fetcher<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>(client, SearchRestaurantsDocument, variables, headers),
       options
     );

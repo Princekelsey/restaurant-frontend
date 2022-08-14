@@ -1,0 +1,12 @@
+query SearchRestaurants($searchInput: SearchRestaurantInput!) {
+  searchRestaurants(searchInput: $searchInput) {
+    restaurants {
+      name
+      address
+      id
+      email
+      phone
+    }
+    totalCount
+  }
+}
