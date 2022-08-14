@@ -81,38 +81,37 @@ const RestaurantsList: React.FC = () => {
           <Spinner />
         </div>
       )}
-      {restaurants.length ? (
-        <div className='pt-[42px] w-full'>
-          {restaurants.map((res) => (
-            <RestaurantCard
-              key={res.id}
-              restaurant={res}
-              className='mb-[10px]'
-              onDelete={onDelete}
-              onItemClick={onEdit}
-            />
-          ))}
-          <div className='flex items-center justify-between mt-7'>
-            <Button
-              className='bg-[#323cf0] w-[88px] h-11 text-white hover:bg-[#4c54ee]'
-              type='button'
-              onClick={() => setIsModal(true)}
-            >
-              <PlusIcon />
-            </Button>
 
-            {totalCount > pageSize && (
-              <div>
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(totalCount / pageSize)}
-                  setCurrentPage={(page) => setCurrentPage(page)}
-                />
-              </div>
-            )}
-          </div>
+      <div className='pt-[42px] w-full'>
+        {restaurants.map((res) => (
+          <RestaurantCard
+            key={res.id}
+            restaurant={res}
+            className='mb-[10px]'
+            onDelete={onDelete}
+            onItemClick={onEdit}
+          />
+        ))}
+        <div className='flex items-center justify-between mt-7'>
+          <Button
+            className='bg-[#323cf0] w-[88px] h-11 text-white hover:bg-[#4c54ee]'
+            type='button'
+            onClick={() => setIsModal(true)}
+          >
+            <PlusIcon />
+          </Button>
+
+          {totalCount > pageSize && (
+            <div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(totalCount / pageSize)}
+                setCurrentPage={(page) => setCurrentPage(page)}
+              />
+            </div>
+          )}
         </div>
-      ) : null}
+      </div>
 
       <AddAndEditRestaurant
         isOpen={isModal}

@@ -10,10 +10,10 @@ const ConfirmaWindow: React.FC = () => {
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>
-        <h6 className='text-[22px] font-semibold'>{title && "Alert"}</h6>
+        <h6 className='text-[22px] font-semibold'>{title && "Alert!"}</h6>
       </ModalHeader>
       <ModalBody>
-        <p className='py-4'>{prompt}</p>
+        <p className='py-2'>{prompt}</p>
       </ModalBody>
       <ModalFooter>
         <ModalFooter className='flex pt-4  space-x-2'>
