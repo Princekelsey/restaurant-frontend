@@ -24,7 +24,7 @@ const RestaurantsList: React.FC = () => {
   const {
     data: { restaurants, totalCount },
     isLoading,
-    deleRestaurant,
+    deleteRestaurant,
     refetch,
   } = useRestaurants({
     variables: {
@@ -37,7 +37,7 @@ const RestaurantsList: React.FC = () => {
   });
 
   const onDelete = async (id: string) => {
-    await deleRestaurant.mutateAsync({ id });
+    await deleteRestaurant.mutateAsync({ id });
   };
 
   const onEdit = (item: Restaurant) => {

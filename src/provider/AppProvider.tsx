@@ -1,6 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ConfirmationProvider } from "../context/confirmation/store";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,10 +18,12 @@ const queryClient = new QueryClient({
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      {children}
-    </QueryClientProvider>
+    <ConfirmationProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        {children}
+      </QueryClientProvider>
+    </ConfirmationProvider>
   );
 };
 

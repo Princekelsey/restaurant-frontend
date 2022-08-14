@@ -2,6 +2,7 @@ import React from "react";
 import type { Restaurant } from "../../types";
 import Button from "./Button";
 import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
+import useConfirm from "../../hooks/useConfirm";
 
 interface RestaurantCardProps {
   className?: string;
@@ -16,6 +17,20 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   onItemClick,
   onDelete,
 }) => {
+  const { handleConfirm } = useConfirm();
+
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    const confirm = await handleConfirm(
+      "Are you sure you want to delete this record ?"
+    );
+
+    if (confirm) {
+      onDelete(restaurant.id);
+    }
+  };
   return (
     <div
       className={`py-[18px] px-5 bg-[#f3f4f5] w-full cursor-pointer hover:bg-[#323cf0] hover:!text-white group ${className}`}
@@ -28,10 +43,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         </div>
         <Button
           className='bg-[#4c54ee] text-white h-12 hidden group-hover:block hover:bg-white hover:text-[#323cf0]'
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(restaurant.id);
-          }}
+          onClick={handleDelete}
         >
           <MinusIcon />
         </Button>

@@ -73,7 +73,7 @@ const useRestaurants = (config: UseRestaurantsInput) => {
     },
   });
 
-  const deleRestaurant = useDeleteRestaurantMutation(requestClient, {
+  const deleteRestaurant = useDeleteRestaurantMutation(requestClient, {
     onSuccess: () => {
       queryClient.invalidateQueries("SearchRestaurants");
       queryClient.invalidateQueries("GetRestaurants");
@@ -96,7 +96,7 @@ const useRestaurants = (config: UseRestaurantsInput) => {
     error: error || getRestaurantError,
     createRestaurant,
     updateRestaurant,
-    deleRestaurant,
+    deleteRestaurant,
     refetch,
   };
 };
