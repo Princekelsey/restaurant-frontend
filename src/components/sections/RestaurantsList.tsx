@@ -8,6 +8,7 @@ import Pagination from "../elements/Pagination";
 import useRestaurants from "../../modules/restaurants/hooks/useRestaurants";
 import AddAndEditRestaurant from "./AddAndEditRestaurant";
 import type { Restaurant } from "../../types";
+import Spinner from "../elements/Spinner";
 
 const pageSize = 5;
 
@@ -18,6 +19,8 @@ const RestaurantsList: React.FC = () => {
 
   const {
     data: { restaurants, totalCount },
+    isLoading,
+    deleRestaurant,
   } = useRestaurants({
     variables: {
       searchInput: {
@@ -28,7 +31,9 @@ const RestaurantsList: React.FC = () => {
     },
   });
 
-  const onDelete = (id: string) => {};
+  const onDelete = async (id: string) => {
+    await deleRestaurant.mutateAsync({ id });
+  };
 
   const onEdit = (item: Restaurant) => {
     setIsModal(true);
@@ -51,6 +56,11 @@ const RestaurantsList: React.FC = () => {
           <SearchIcon className='w-[18px] h-[18px]' />
         </Button>
       </form>
+      {(isLoading || deleRestaurant.isLoading) && (
+        <div className='flex justify-center w-full mt-8'>
+          <Spinner />
+        </div>
+      )}
       {restaurants.length ? (
         <div className='pt-[42px] w-full'>
           {restaurants.map((res) => (

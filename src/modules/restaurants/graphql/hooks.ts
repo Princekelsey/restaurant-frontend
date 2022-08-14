@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -103,6 +103,20 @@ export type UpdateRestaurantInput = {
   phone?: InputMaybe<Scalars['String']>;
 };
 
+export type CreateRestaurantMutationVariables = Exact<{
+  data: CreateRestaurantInput;
+}>;
+
+
+export type CreateRestaurantMutation = { __typename?: 'Mutation', createRestaurant: { __typename?: 'Restaurant', id: string } };
+
+export type DeleteRestaurantMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteRestaurantMutation = { __typename?: 'Mutation', deleteRestaurant: boolean };
+
 export type GetRestaurantsQueryVariables = Exact<{
   pagination: PaginationInput;
 }>;
@@ -117,7 +131,53 @@ export type SearchRestaurantsQueryVariables = Exact<{
 
 export type SearchRestaurantsQuery = { __typename?: 'Query', searchRestaurants: { __typename?: 'RestaurantPaginatationResponse', totalCount: number, restaurants: Array<{ __typename?: 'Restaurant', name: string, address: string, id: string, email: string, phone: string }> } };
 
+export type UpdateRestaurantMutationVariables = Exact<{
+  data: UpdateRestaurantInput;
+  id: Scalars['String'];
+}>;
 
+
+export type UpdateRestaurantMutation = { __typename?: 'Mutation', updateRestaurant: { __typename?: 'Restaurant', id: string } };
+
+
+export const CreateRestaurantDocument = `
+    mutation CreateRestaurant($data: CreateRestaurantInput!) {
+  createRestaurant(data: $data) {
+    id
+  }
+}
+    `;
+export const useCreateRestaurantMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<CreateRestaurantMutation, TError, CreateRestaurantMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<CreateRestaurantMutation, TError, CreateRestaurantMutationVariables, TContext>(
+      ['CreateRestaurant'],
+      (variables?: CreateRestaurantMutationVariables) => fetcher<CreateRestaurantMutation, CreateRestaurantMutationVariables>(client, CreateRestaurantDocument, variables, headers)(),
+      options
+    );
+export const DeleteRestaurantDocument = `
+    mutation DeleteRestaurant($id: String!) {
+  deleteRestaurant(id: $id)
+}
+    `;
+export const useDeleteRestaurantMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<DeleteRestaurantMutation, TError, DeleteRestaurantMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<DeleteRestaurantMutation, TError, DeleteRestaurantMutationVariables, TContext>(
+      ['DeleteRestaurant'],
+      (variables?: DeleteRestaurantMutationVariables) => fetcher<DeleteRestaurantMutation, DeleteRestaurantMutationVariables>(client, DeleteRestaurantDocument, variables, headers)(),
+      options
+    );
 export const GetRestaurantsDocument = `
     query GetRestaurants($pagination: PaginationInput!) {
   restaurants(pagination: $pagination) {
@@ -172,5 +232,25 @@ export const useSearchRestaurantsQuery = <
     useQuery<SearchRestaurantsQuery, TError, TData>(
       ['SearchRestaurants', variables],
       fetcher<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>(client, SearchRestaurantsDocument, variables, headers),
+      options
+    );
+export const UpdateRestaurantDocument = `
+    mutation UpdateRestaurant($data: UpdateRestaurantInput!, $id: String!) {
+  updateRestaurant(data: $data, id: $id) {
+    id
+  }
+}
+    `;
+export const useUpdateRestaurantMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>(
+      ['UpdateRestaurant'],
+      (variables?: UpdateRestaurantMutationVariables) => fetcher<UpdateRestaurantMutation, UpdateRestaurantMutationVariables>(client, UpdateRestaurantDocument, variables, headers)(),
       options
     );

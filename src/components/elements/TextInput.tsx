@@ -18,8 +18,10 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <div className='w-full'>
       <input
-        className={`w-full rounded-none p-2 border-[#848484] border-2 placeholder:text-[#6f6f6f] focus:outline-0 focus:border-[#323cf0] ${
-          hasError ? "border-[#dd1313]" : "border-[#848484]"
+        className={`w-full rounded-none p-2 border-[#848484] border-2 placeholder:text-[#6f6f6f] focus:outline-0  ${
+          hasError
+            ? "border-[#dd1313]"
+            : "border-[#848484] focus:border-[#323cf0]"
         } ${className}`}
         {...rest}
       />

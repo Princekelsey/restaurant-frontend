@@ -1,0 +1,5 @@
+mutation UpdateRestaurant($data: UpdateRestaurantInput!, $id: String!) {
+  updateRestaurant(data: $data, id: $id) {
+    id
+  }
+}

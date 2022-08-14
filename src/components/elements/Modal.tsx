@@ -41,7 +41,7 @@ export const Modal: React.FC<ModalProps> = ({
   );
 
   const modalCls = cls(
-    "fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-white rounded-none p-[20px] space-y-5 drop-shadow w-[558px] h-[430px] bg-white",
+    "fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-white rounded-none p-[20px] space-y-5 drop-shadow w-[558px] max-h-screen bg-white overflow-auto",
     {
       hidden: !isOpen,
     }

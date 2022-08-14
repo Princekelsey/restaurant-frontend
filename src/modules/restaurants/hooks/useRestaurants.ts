@@ -1,7 +1,11 @@
+import { useQueryClient } from "react-query";
 import { restaurantsApiClient } from "../../apiClient";
 import {
   useSearchRestaurantsQuery,
   SearchRestaurantsQueryVariables,
+  useCreateRestaurantMutation,
+  useDeleteRestaurantMutation,
+  useUpdateRestaurantMutation,
 } from "../graphql";
 
 interface UseRestaurantsInput {
@@ -11,6 +15,8 @@ interface UseRestaurantsInput {
 
 const useRestaurants = (config: UseRestaurantsInput) => {
   const requestClient = restaurantsApiClient();
+
+  const queryClient = useQueryClient();
 
   const { data, isError, isLoading, error } = useSearchRestaurantsQuery(
     requestClient,
@@ -22,6 +28,24 @@ const useRestaurants = (config: UseRestaurantsInput) => {
     }
   );
 
+  const createRestaurant = useCreateRestaurantMutation(requestClient, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("SearchRestaurants");
+    },
+  });
+
+  const updateRestaurant = useUpdateRestaurantMutation(requestClient, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("SearchRestaurants");
+    },
+  });
+
+  const deleRestaurant = useDeleteRestaurantMutation(requestClient, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("SearchRestaurants");
+    },
+  });
+
   return {
     data: {
       restaurants: data?.searchRestaurants.restaurants || [],
@@ -30,6 +54,9 @@ const useRestaurants = (config: UseRestaurantsInput) => {
     isError,
     isLoading,
     error,
+    createRestaurant,
+    updateRestaurant,
+    deleRestaurant,
   };
 };
 
