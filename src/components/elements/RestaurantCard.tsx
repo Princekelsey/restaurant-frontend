@@ -40,10 +40,19 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         <a
           className='text-[#323cf0] group-hover:text-white hover:underline'
           href={`mailto:${restaurant.email}`}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           {restaurant.email}
         </a>
-        <a className='hover:underline' href={`tel:+${restaurant.phone}`}>
+        <a
+          className='hover:underline'
+          href={`tel:+${restaurant.phone}`}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           {restaurant.phone}
         </a>
       </div>

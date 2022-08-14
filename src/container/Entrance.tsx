@@ -3,7 +3,7 @@ import RestaurantsList from "../components/sections/RestaurantsList";
 
 const Entrance: React.FC = () => {
   return (
-    <main className='bg-white border shadow-md w-full px-[150px] py-[15px]'>
+    <main className='bg-white border border-gray-300  w-full px-[150px] pt-[15px] pb-16'>
       <RestaurantsList />
     </main>
   );

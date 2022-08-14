@@ -160,7 +160,9 @@ const AddAndEditRestaurant: React.FC<AddAndEditRestaurantProps> = ({
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>
-        <h6 className='text-[22px] font-semibold'>Add restaurant</h6>
+        <h6 className='text-[22px] font-semibold'>
+          {editingItem ? "Edit" : "Add"} restaurant
+        </h6>
       </ModalHeader>
       <ModalBody>
         {(createRestaurant.isLoading || updateRestaurant.isLoading) && (
